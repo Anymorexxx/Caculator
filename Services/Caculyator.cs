@@ -1,57 +1,90 @@
-﻿using System.Globalization;
+﻿using calculator.Common;
 
 namespace calculator.Services
 {
     internal class Caculyator : ICaculator
     {
-        public string Calculate(string n, string m, string operation)
+        public double Calculate(Operation operation, double a, double? b = null)
         {
-            if (double.TryParse(n, out var numberone) == false)
-                return string.Empty;
-            if (double.TryParse(m, out var numbertwo) == false)
-                return string.Empty;
-
-            return ApplyOperator(operation, numberone, numbertwo).ToString("0.#####");
+            return b is null
+                ? ApplyOperator(operation, a)
+                : ApplyOperator(operation, a, b.Value);
         }
 
-        public string SingleOperation(string operand, string operation)
-        {
-            if (double.TryParse(operand, out var numberone) == false)
-                return string.Empty;
-            return ApplyOperator(operation, numberone).ToString("0.#####");
-        }
-
-        private static double ApplyOperator(string token, double operand1, double operand2)
+        private static double ApplyOperator(Operation token, double a, double b)
         {
             switch (token)
             {
-                case "+":
-                    return operand1 + operand2;
-                case "-":
-                    return operand1 - operand2;
-                case "*":
-                    return operand1 * operand2;
-                case "/":
-                    return operand1 / operand2;
-                case "^":
-                    return Math.Pow(operand1, operand2);
+                case Operation.Add:
+                    return a + b;
+                case Operation.Sub:
+                    return a - b;
+                case Operation.Mul:
+                    return a * b;
+                case Operation.Div:
+                    return a / b;
+                case Operation.Pow:
+                    return Math.Pow(a, b);
+                case Operation.SqrtY:
+                    return Math.Pow(a, 1 / b);
+                case Operation.PowY:
+                    return Math.Pow(a, b);
+                case Operation.Mod:
+                    return a % b;
                 default:
                     throw new ArgumentException($"Invalid operator: {token}");
             }
         }
 
-        private static double ApplyOperator(string token, double operand1)
+        private static double Factorial(double n)
+        {
+            if (n == 0)
+                return 1;
+            return n * Factorial(n - 1);
+        }
+
+        private static double ApplyOperator(Operation token, double a)
         {
             switch (token)
             {
-                case "1/":
-                    return 1 / operand1;
-                case "√":
-                    return Math.Sqrt(operand1);
-                case "%":
-                    return operand1 / 100;
-                case "-1":
-                    return operand1 * -1;
+                case Operation.OneDiv:
+                    return 1 / a;
+                case Operation.Sqrt:
+                    return Math.Sqrt(a);
+                case Operation.Percent:
+                    return a / 100;
+                case Operation.Neg:
+                    return a * -1;
+                case Operation.Sinh:
+                    return Math.Sinh(a);
+                case Operation.Sin:
+                    return Math.Sin(a);
+                case Operation.Cosh:
+                    return Math.Cosh(a);
+                case Operation.Cos:
+                    return Math.Cos(a);
+                case Operation.Tanh:
+                    return Math.Tanh(a);
+                case Operation.Tan:
+                    return Math.Tan(a);
+                case Operation.Factorial:
+                    return Factorial(a);
+                case Operation.Square:
+                    return Math.Pow(a, 2);
+                case Operation.Cube:
+                    return Math.Pow(a, 3);
+                case Operation.CubeRoot:
+                    return Math.Pow(a, 1 / 3);
+                case Operation.Log:
+                    return Math.Log10(a);
+                case Operation.Ln:
+                    return Math.Log(a);
+                case Operation.Exp:
+                    return Math.Exp(a);
+                case Operation.Inv:
+                    return 1 / a;
+                case Operation.Pi:
+                    return Math.PI;
                 default:
                     throw new ArgumentException($"Invalid operator: {token}");
             }

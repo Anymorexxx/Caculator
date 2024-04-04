@@ -1,4 +1,5 @@
-﻿using calculator.View;
+﻿using calculator.Common;
+using calculator.View;
 
 namespace calculator
 {
@@ -10,9 +11,9 @@ namespace calculator
         }
 
         public event Action<char>? OperandPressed;
-        public event Action<string>? OperatorPressed;
-        public event Action<string>? SingleOperatorPressed;
-        public event Action? ClearPressed;
+        public event Action<Operation>? OperatorPressed;
+        public event Action<Operation>? SingleOperatorPressed;
+        public event Action<bool>? ClearPressed;
         public event Action? CalculatePressed;
 
         public void UpdateView(string input)
@@ -22,7 +23,12 @@ namespace calculator
 
         private void OnCEButtonClick(object sender, EventArgs e)
         {
-            ClearPressed?.Invoke();
+            ClearPressed?.Invoke(false);
+        }
+
+        private void CButtonClick(object sender, EventArgs e)
+        {
+            ClearPressed?.Invoke(true);
         }
 
         private void OnZeroButtonClick(object sender, EventArgs e)
@@ -82,42 +88,77 @@ namespace calculator
 
         private void OnNegativeButtonClick(object sender, EventArgs e)
         {
-            SingleOperatorPressed?.Invoke("-1");
+            SingleOperatorPressed?.Invoke(Operation.Neg);
         }
 
         private void OnPlusButtonClick(object sender, EventArgs e)
         {
-            OperatorPressed?.Invoke("+");
+            OperatorPressed?.Invoke(Operation.Add);
         }
 
         private void OnMinusButtonClick(object sender, EventArgs e)
         {
-            OperatorPressed?.Invoke("-");
+            OperatorPressed?.Invoke(Operation.Sub);
         }
 
         private void OnMultButtonClick(object sender, EventArgs e)
         {
-            OperatorPressed?.Invoke("*");
+            OperatorPressed?.Invoke(Operation.Mul);
         }
 
         private void OnDivideButtonClick(object sender, EventArgs e)
         {
-            OperatorPressed?.Invoke("/");
+            OperatorPressed?.Invoke(Operation.Div);
         }
 
         private void OnSqrtButtonClick(object sender, EventArgs e)
         {
-            SingleOperatorPressed?.Invoke("√");
+            SingleOperatorPressed?.Invoke(Operation.Sqrt);
         }
 
         private void OnPercentButtonClick(object sender, EventArgs e)
         {
-            SingleOperatorPressed?.Invoke("%");
+            SingleOperatorPressed?.Invoke(Operation.Percent);
         }
 
         private void OnInverseButtonClick(object sender, EventArgs e)
         {
-            SingleOperatorPressed?.Invoke("1/");
+            SingleOperatorPressed?.Invoke(Operation.OneDiv);
+        }
+
+        private void OnSinhButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.Sinh);
+        }
+
+        private void OnSinButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.Sin);
+        }
+
+        private void OnCoshButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.Cosh);
+        }
+
+        private void OnCosButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.Cos);
+        }
+
+        private void OnTanhButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.Tanh);
+        }
+
+        private void OnTanButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.Tan);
+        }
+
+        private void OnSqrtYButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.SqrtY);
         }
 
         private void OnEqualButtonClick(object sender, EventArgs e)
@@ -125,9 +166,59 @@ namespace calculator
             CalculatePressed?.Invoke();
         }
 
-        private void button39_Click(object sender, EventArgs e)
+        private void OnFactorialButtonClick(object sender, EventArgs e)
         {
-            
+            SingleOperatorPressed?.Invoke(Operation.Factorial);
+        }
+
+        private void OnModButtonClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnCubeRootButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.CubeRoot);
+        }
+
+        private void OnSquareButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.Square);
+        }
+
+        private void OnPowYButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.PowY);
+        }
+
+        private void OnCubeButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.Cube);
+        }
+
+        private void OnLogButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.Log);
+        }
+
+        private void OnInvButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.Inv);
+        }
+
+        private void OnLnButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.Ln);
+        }
+
+        private void OnExpButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.Exp);
+        }
+
+        private void OnPiButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.Pi);
         }
     }
 }
