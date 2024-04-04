@@ -158,7 +158,7 @@ namespace calculator
 
         private void OnSqrtYButtonClick(object sender, EventArgs e)
         {
-            SingleOperatorPressed?.Invoke(Operation.SqrtY);
+            OperatorPressed?.Invoke(Operation.SqrtY);
         }
 
         private void OnEqualButtonClick(object sender, EventArgs e)
@@ -173,7 +173,7 @@ namespace calculator
 
         private void OnModButtonClick(object sender, EventArgs e)
         {
-
+            OperatorPressed?.Invoke(Operation.Mod);
         }
 
         private void OnCubeRootButtonClick(object sender, EventArgs e)
@@ -188,7 +188,7 @@ namespace calculator
 
         private void OnPowYButtonClick(object sender, EventArgs e)
         {
-            SingleOperatorPressed?.Invoke(Operation.PowY);
+            OperatorPressed?.Invoke(Operation.PowY);
         }
 
         private void OnCubeButtonClick(object sender, EventArgs e)
@@ -220,5 +220,6 @@ namespace calculator
         {
             SingleOperatorPressed?.Invoke(Operation.Pi);
         }
+
     }
 }

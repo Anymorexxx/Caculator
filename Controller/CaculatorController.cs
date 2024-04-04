@@ -97,7 +97,7 @@ public class CaculatorController
     {
         if (_data.Caculated)
         {
-            Clear(full: false);
+            Clear(full: true);
         }
 
         _data.Input = _inputService.TryInput(_data.Input + obj);
