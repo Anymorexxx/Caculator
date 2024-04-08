@@ -1,5 +1,4 @@
-﻿using calculator.Commands;
-using calculator.Common;
+﻿using calculator.Common;
 using calculator.Model;
 using calculator.Services;
 using calculator.View;
@@ -12,7 +11,6 @@ public class CaculatorController
     private readonly IInputService _inputService;
     private readonly ICaculatorView _view;
     private readonly CaculatorData _data;
-    private ICommand? _currentCommand;
 
     public CaculatorController(ICaculator caculator, IInputService inputService, ICaculatorView view,
         CaculatorData data)
@@ -32,9 +30,14 @@ public class CaculatorController
 
     private void OnSingleOperationPressed(Operation operation)
     {
-        OnOperatorPressed(operation);
-        _currentCommand = new CalculateCommand(_caculator, _data);
-        OnCalculatePressed();
+        if (_data.Values.Count == 0)
+            return;
+
+        if (double.TryParse(_data.Input, out var value) == false)
+            return;
+
+        _data.Values.Push(_caculator.Calculate(operation, value));
+        UpdateView(_data.Values.Peek()!.Value);
     }
 
     private void OnClearPressed(bool full)
@@ -42,60 +45,104 @@ public class CaculatorController
         Clear(full: full);
     }
 
+    private void Calculate(bool fullAnswer = true)
+    {
+        if (_data.Operations.Count == 0)
+            return;
+
+        if (_data.Values.Count == 0)
+            return;
+
+        if (TryGetValueFromInput() == false)
+            return;
+
+        PerformCalculation(fullAnswer);
+
+        UpdateView(_data.Values.Peek()!.Value);
+    }
+
     private void OnCalculatePressed()
     {
-        if (_data.Operation is null)
-            return;
+        Calculate();
+    }
 
-        if (_data.Value is null)
-            return;
-
-        if (_data is not { Caculated: true, Input: null } || _currentCommand == null)
+    private void PerformCalculation(bool fullAnswer = true)
+    {
+        while (true)
         {
-            _currentCommand = new CalculateCommand(_caculator, _data);
+            while (_data.Operations.Count > 0 && _data.Operations.Peek() != Operation.OpenBracket)
+            {
+                var b = _data.Values.Pop();
+                var a = _data.Values.Pop();
+                _data.Values.Push(_caculator.Calculate(_data.Operations.Pop(), a!.Value, b!.Value));
+            }
+
+            if (_data.Operations.Count > 0 && _data.Operations.Peek() == Operation.OpenBracket && fullAnswer)
+            {
+                _data.Operations.Pop();
+            }
+
+            if (_data.Operations.Count > 0 && fullAnswer)
+            {
+                continue;
+            }
+
+            break;
         }
- 
-        _currentCommand?.Execute();
-        _data.Caculated = true;
-        UpdateView(_data.Value.Value);
     }
 
     private void Clear(string value = "0", bool full = true)
     {
         if (full)
         {
-            _data.Value = null;
-            _data.Operation = null;
+            _data.Values.Clear();
+            _data.Operations.Clear();
         }
-        
-        _data.Caculated = false;
+
         _data.Input = null;
         _view.UpdateView(value);
     }
 
     private void OnOperatorPressed(Operation operation)
     {
-        if (_data.Input == null && _data.Value == null)
-            return;
-
-        if (_data is { Caculated: false, Input: not null, Value: not null })
+        if (_data.Operations.Count > 0)
         {
-            OnCalculatePressed();
+            if (operation == Operation.CloseBracket)
+            {
+                Calculate(false);
+                return;
+            }
+
+            if (operation != Operation.OpenBracket && operation.IsLowerOrEqual(_data.Operations.Peek()))
+            {
+                Calculate(false);
+            }
         }
 
-        _data.Operation = operation;
+        _data.Operations.Push(operation);
 
-        if (_data.Input != null)
+        TryGetValueFromInput();
+    }
+
+    private bool TryGetValueFromInput()
+    {
+        if (_data.Input is not null)
         {
-            _data.Value = double.Parse(_data.Input);
+            if (double.TryParse(_data.Input, out var value) == false)
+            {
+                return false;
+            }
+
+            _data.Values.Push(value);
         }
 
         _data.Input = null;
+        return true;
     }
 
     private void OnOperandPressed(char obj)
     {
-        if (_data.Caculated)
+        if (_data.Operations.Count == 0 && _data.Input == null)
         {
             Clear(full: true);
         }

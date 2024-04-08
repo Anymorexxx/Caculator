@@ -221,5 +221,14 @@ namespace calculator
             SingleOperatorPressed?.Invoke(Operation.Pi);
         }
 
+        private void OnOpenBracketButtonClick(object? sender, EventArgs e)
+        {
+            OperatorPressed?.Invoke(Operation.OpenBracket);
+        }
+
+        private void OnCloseBracketButtonClick(object? sender, EventArgs e)
+        {
+            OperatorPressed?.Invoke(Operation.CloseBracket);
+        }
     }
 }

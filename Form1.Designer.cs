@@ -403,6 +403,7 @@
             button23.TabIndex = 35;
             button23.Text = ")";
             button23.UseVisualStyleBackColor = true;
+            button23.Click += OnCloseBracketButtonClick;
             // 
             // button30
             // 
@@ -414,6 +415,7 @@
             button30.TabIndex = 34;
             button30.Text = "(";
             button30.UseVisualStyleBackColor = true;
+            button30.Click += OnOpenBracketButtonClick;
             // 
             // Ln_button
             // 

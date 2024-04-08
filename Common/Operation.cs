@@ -28,5 +28,7 @@ public enum Operation
     Cosh,
     Cos,
     Tanh,
-    Tan
+    Tan,
+    OpenBracket,
+    CloseBracket
 }
