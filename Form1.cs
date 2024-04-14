@@ -15,6 +15,7 @@ namespace calculator
         public event Action<Operation>? SingleOperatorPressed;
         public event Action<bool>? ClearPressed;
         public event Action? CalculatePressed;
+        public event Action<Constants>? Constants;
 
         public void UpdateView(string input)
         {
@@ -83,7 +84,7 @@ namespace calculator
 
         private void OnDotButtonClick(object sender, EventArgs e)
         {
-            OperandPressed?.Invoke('.');
+            OperandPressed?.Invoke(',');
         }
 
         private void OnNegativeButtonClick(object sender, EventArgs e)
@@ -198,7 +199,7 @@ namespace calculator
 
         private void OnLogButtonClick(object sender, EventArgs e)
         {
-            SingleOperatorPressed?.Invoke(Operation.Log);
+            OperatorPressed?.Invoke(Operation.Log);
         }
 
         private void OnInvButtonClick(object sender, EventArgs e)
@@ -213,13 +214,32 @@ namespace calculator
 
         private void OnExpButtonClick(object sender, EventArgs e)
         {
-            SingleOperatorPressed?.Invoke(Operation.Exp);
+            Constants?.Invoke(Common.Constants.Exp);
         }
 
         private void OnPiButtonClick(object sender, EventArgs e)
         {
-            SingleOperatorPressed?.Invoke(Operation.Pi);
+            Constants?.Invoke(Common.Constants.Pi);
         }
 
+        private void OnOpenBracketButtonClick(object? sender, EventArgs e)
+        {
+            OperatorPressed?.Invoke(Operation.OpenBracket);
+        }
+
+        private void OnCloseBracketButtonClick(object? sender, EventArgs e)
+        {
+            OperatorPressed?.Invoke(Operation.CloseBracket);
+        }
+
+        private void OnIntButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.Int);
+        }
+
+        private void OnPowXButtonClick(object sender, EventArgs e)
+        {
+            SingleOperatorPressed?.Invoke(Operation.PowX);
+        }
     }
 }

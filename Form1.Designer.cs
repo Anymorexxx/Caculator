@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            button49 = new Button();
+            PowX = new Button();
             Log_button = new Button();
             Mod_button = new Button();
             Exp_button = new Button();
@@ -97,7 +97,7 @@
             // panel1
             // 
             panel1.BackColor = Color.MediumSlateBlue;
-            panel1.Controls.Add(button49);
+            panel1.Controls.Add(PowX);
             panel1.Controls.Add(Log_button);
             panel1.Controls.Add(Mod_button);
             panel1.Controls.Add(Exp_button);
@@ -157,16 +157,17 @@
             panel1.Size = new Size(573, 338);
             panel1.TabIndex = 0;
             // 
-            // button49
+            // PowX
             // 
-            button49.FlatStyle = FlatStyle.Flat;
-            button49.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button49.Location = new Point(232, 296);
-            button49.Name = "button49";
-            button49.Size = new Size(51, 37);
-            button49.TabIndex = 55;
-            button49.Text = "10ᵜ";
-            button49.UseVisualStyleBackColor = true;
+            PowX.FlatStyle = FlatStyle.Flat;
+            PowX.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            PowX.Location = new Point(232, 296);
+            PowX.Name = "PowX";
+            PowX.Size = new Size(51, 37);
+            PowX.TabIndex = 55;
+            PowX.Text = "10ᵜ";
+            PowX.UseVisualStyleBackColor = true;
+            PowX.Click += OnPowXButtonClick;
             // 
             // Log_button
             // 
@@ -206,8 +207,11 @@
             // 
             // button53
             // 
+            button53.Cursor = Cursors.No;
+            button53.Enabled = false;
             button53.FlatStyle = FlatStyle.Flat;
             button53.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button53.ForeColor = Color.Tomato;
             button53.Location = new Point(4, 296);
             button53.Name = "button53";
             button53.Size = new Size(51, 37);
@@ -325,8 +329,12 @@
             // 
             // dms_button
             // 
+            dms_button.BackgroundImageLayout = ImageLayout.None;
+            dms_button.Cursor = Cursors.No;
+            dms_button.Enabled = false;
             dms_button.FlatStyle = FlatStyle.Flat;
             dms_button.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dms_button.ForeColor = Color.Tomato;
             dms_button.Location = new Point(4, 210);
             dms_button.Name = "dms_button";
             dms_button.Size = new Size(51, 37);
@@ -392,6 +400,7 @@
             Int_button.TabIndex = 36;
             Int_button.Text = "Int";
             Int_button.UseVisualStyleBackColor = true;
+            Int_button.Click += OnIntButtonClick;
             // 
             // button23
             // 
@@ -403,6 +412,7 @@
             button23.TabIndex = 35;
             button23.Text = ")";
             button23.UseVisualStyleBackColor = true;
+            button23.Click += OnCloseBracketButtonClick;
             // 
             // button30
             // 
@@ -414,6 +424,7 @@
             button30.TabIndex = 34;
             button30.Text = "(";
             button30.UseVisualStyleBackColor = true;
+            button30.Click += OnOpenBracketButtonClick;
             // 
             // Ln_button
             // 
@@ -729,8 +740,11 @@
             // 
             // button5
             // 
+            button5.Cursor = Cursors.No;
+            button5.Enabled = false;
             button5.FlatStyle = FlatStyle.Flat;
             button5.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button5.ForeColor = Color.Tomato;
             button5.Location = new Point(517, 81);
             button5.Name = "button5";
             button5.Size = new Size(51, 37);
@@ -740,8 +754,11 @@
             // 
             // button4
             // 
+            button4.Cursor = Cursors.No;
+            button4.Enabled = false;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button4.ForeColor = Color.Tomato;
             button4.Location = new Point(460, 81);
             button4.Name = "button4";
             button4.Size = new Size(51, 37);
@@ -751,8 +768,11 @@
             // 
             // button3
             // 
+            button3.Cursor = Cursors.No;
+            button3.Enabled = false;
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button3.ForeColor = Color.Tomato;
             button3.Location = new Point(403, 81);
             button3.Name = "button3";
             button3.Size = new Size(51, 37);
@@ -762,8 +782,11 @@
             // 
             // button2
             // 
+            button2.Cursor = Cursors.No;
+            button2.Enabled = false;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button2.ForeColor = Color.Tomato;
             button2.Location = new Point(346, 81);
             button2.Name = "button2";
             button2.Size = new Size(51, 37);
@@ -773,8 +796,11 @@
             // 
             // button1
             // 
+            button1.Cursor = Cursors.No;
+            button1.Enabled = false;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.ForeColor = Color.Tomato;
             button1.Location = new Point(289, 81);
             button1.Name = "button1";
             button1.Size = new Size(51, 37);
@@ -796,8 +822,11 @@
             // radioButton3
             // 
             radioButton3.AutoSize = true;
+            radioButton3.BackgroundImageLayout = ImageLayout.None;
+            radioButton3.Cursor = Cursors.No;
+            radioButton3.Enabled = false;
             radioButton3.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            radioButton3.ForeColor = Color.FromArgb(255, 192, 255);
+            radioButton3.ForeColor = Color.Tomato;
             radioButton3.Location = new Point(197, 13);
             radioButton3.Name = "radioButton3";
             radioButton3.Size = new Size(76, 22);
@@ -809,8 +838,11 @@
             // radioButton2
             // 
             radioButton2.AutoSize = true;
+            radioButton2.BackgroundImageLayout = ImageLayout.None;
+            radioButton2.Cursor = Cursors.No;
+            radioButton2.Enabled = false;
             radioButton2.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            radioButton2.ForeColor = Color.FromArgb(255, 192, 255);
+            radioButton2.ForeColor = Color.Tomato;
             radioButton2.Location = new Point(98, 13);
             radioButton2.Name = "radioButton2";
             radioButton2.Size = new Size(95, 22);
@@ -822,8 +854,11 @@
             // radioButton1
             // 
             radioButton1.AutoSize = true;
+            radioButton1.BackgroundImageLayout = ImageLayout.None;
+            radioButton1.Cursor = Cursors.No;
+            radioButton1.Enabled = false;
             radioButton1.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            radioButton1.ForeColor = Color.FromArgb(255, 192, 255);
+            radioButton1.ForeColor = Color.Tomato;
             radioButton1.Location = new Point(6, 13);
             radioButton1.Name = "radioButton1";
             radioButton1.Size = new Size(93, 22);
@@ -848,6 +883,7 @@
             // linkLabel1
             // 
             linkLabel1.AutoSize = true;
+            linkLabel1.Enabled = false;
             linkLabel1.LinkColor = Color.FromArgb(255, 192, 255);
             linkLabel1.Location = new Point(16, 6);
             linkLabel1.Name = "linkLabel1";
@@ -859,6 +895,7 @@
             // linkLabel2
             // 
             linkLabel2.AutoSize = true;
+            linkLabel2.Enabled = false;
             linkLabel2.LinkColor = Color.FromArgb(255, 192, 255);
             linkLabel2.Location = new Point(49, 6);
             linkLabel2.Name = "linkLabel2";
@@ -870,6 +907,7 @@
             // linkLabel3
             // 
             linkLabel3.AutoSize = true;
+            linkLabel3.Enabled = false;
             linkLabel3.LinkColor = Color.FromArgb(255, 192, 255);
             linkLabel3.Location = new Point(102, 6);
             linkLabel3.Name = "linkLabel3";
@@ -914,7 +952,7 @@
         private LinkLabel linkLabel1;
         private LinkLabel linkLabel2;
         private LinkLabel linkLabel3;
-        private Button button49;
+        private Button PowX;
         private Button Log_button;
         private Button Mod_button;
         private Button Exp_button;
