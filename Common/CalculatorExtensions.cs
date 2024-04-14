@@ -23,9 +23,7 @@ public static class CalculatorExtensions
             case Operation.Square:
             case Operation.Log:
             case Operation.Ln:
-            case Operation.Exp:
             case Operation.Inv:
-            case Operation.Pi:
             case Operation.OneDiv:
             case Operation.Mod:
             case Operation.Neg:

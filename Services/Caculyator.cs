@@ -31,6 +31,8 @@ namespace calculator.Services
                     return Math.Pow(a, b);
                 case Operation.Mod:
                     return a % b;
+                case Operation.Log:
+                    return Math.Log(a, b);
                 default:
                     throw new ArgumentException($"Invalid operator: {token}");
             }
@@ -75,16 +77,14 @@ namespace calculator.Services
                     return Math.Pow(a, 3);
                 case Operation.CubeRoot:
                     return Math.Pow(a, 1 / 3);
-                case Operation.Log:
-                    return Math.Log10(a);
                 case Operation.Ln:
                     return Math.Log(a);
-                case Operation.Exp:
-                    return Math.Exp(a);
                 case Operation.Inv:
                     return 1 / a;
-                case Operation.Pi:
-                    return Math.PI;
+                case Operation.Int:
+                    return Math.Round(a);
+                case Operation.PowX:
+                    return Math.Pow(10, a);
                 default:
                     throw new ArgumentException($"Invalid operator: {token}");
             }

@@ -9,5 +9,6 @@ public interface ICaculatorView
     public event Action<bool> ClearPressed;
     public event Action CalculatePressed;
     public event Action<Operation> SingleOperatorPressed;
+    public event Action<Constants> Constants;
     public void UpdateView(string input);
 }

@@ -2,6 +2,7 @@
 using calculator.Model;
 using calculator.Services;
 using calculator.View;
+using System.Runtime.InteropServices;
 
 namespace calculator.Controller;
 
@@ -25,19 +26,24 @@ public class CaculatorController
         _view.ClearPressed += OnClearPressed;
         _view.CalculatePressed += OnCalculatePressed;
         _view.SingleOperatorPressed += OnSingleOperationPressed;
+        _view.Constants += OnConstantsPressed;
         OnClearPressed(true);
     }
 
     private void OnSingleOperationPressed(Operation operation)
     {
-        if (_data.Values.Count == 0)
-            return;
-
         if (double.TryParse(_data.Input, out var value) == false)
-            return;
+        {
+            if (_data.Values.Count > 0)
+            {
+                value = _data.Values.Pop()!.Value;
+            }
+            else { return; }
+        }
 
         _data.Values.Push(_caculator.Calculate(operation, value));
         UpdateView(_data.Values.Peek()!.Value);
+        _data.Input = null;
     }
 
     private void OnClearPressed(bool full)
@@ -160,4 +166,26 @@ public class CaculatorController
     {
         _view.UpdateView(input);
     }
+
+    private void OnConstantsPressed(Constants constants)
+    {
+        if (_data.Operations.Count == 0 && _data.Input == null)
+        {
+            Clear(full: true);
+        }
+
+        double output = 0;
+        switch (constants)
+        {
+            case Constants.Pi:
+                output = Math.PI;
+                    break;
+            case Constants.Exp:
+                output = Math.E;
+                    break;
+        }
+        _data.Input = output.ToString("0.#####");
+        UpdateView(output);
+    }
 }
+

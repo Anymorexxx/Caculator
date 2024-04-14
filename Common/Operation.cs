@@ -18,7 +18,6 @@ public enum Operation
     Ln,
     Exp,
     Inv,
-    Pi,
     OneDiv,
     Mod,
     Neg,
@@ -30,5 +29,14 @@ public enum Operation
     Tanh,
     Tan,
     OpenBracket,
-    CloseBracket
+    CloseBracket,
+    Int,
+    Dms,
+    FE,
+    PowX
+}
+public enum Constants
+{
+    Pi,
+    Exp
 }
